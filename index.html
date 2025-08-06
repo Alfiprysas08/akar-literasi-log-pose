@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akar Literasi Log-pose</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Cek login
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+  <header>
+    Akar Literasi Log-pose
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showTab('home')">HOME</a></li>
+      <li><a href="#" onclick="showTab('materi')">LOG-POSE</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="home" class="tab-content active">
+      <h2>Selamat datang di Akar Literasi Log-pose 🏴‍☠️</h2>
+      <p>Petualangan literasi dimulai dari sini!</p>
+    </section>
+   <img src="pirates.png" alt="Kapal Layar" class="kapal-layar hidden" id="kapalLayar" />
+
+
+    <section id="materi" class="tab-content">
+      <h2>Materi Silabus</h2>
+      <details open>
+        <summary><strong>Strategi Sukses di Sekolah</strong></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Nama Materi</th>
+              <th>Status Pengerjaan</th>
+              <th>Pemateri</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+  <tr>
+    <td>Memaknai arti kata sukses</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Keresahan sebagai kekuatan</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Motivasi belajar</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Life is the choice</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Luka pengasuhan</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Leadership mastery</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Sang mentor</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Kecerdasan emosional</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Outdoor learning</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Manajemen waktu</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Manajemen amal</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Manajemen keuangan</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Manajemen konflik</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Personal branding</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Agent of change</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Good followership</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+  <tr>
+    <td>Dunia adalah permainan</td>
+    <td><input type="number" min="0" max="100" value="0" /> %</td>
+    <td>
+      <select>
+        <option>Mim</option>
+        <option>Ibhoy</option>
+        <option>Rangga</option>
+        <option>Alfi</option>
+        <option>Beni</option>
+        <option>Fauzi</option>
+        <option>Jihan</option>
+        <option>Saepul</option>
+      </select>
+    </td>
+    <td><input type="url" placeholder="https://..." /></td>
+  </tr>
+</tbody>
+        </table>
+      </details>
+      <details>
+        <summary><strong>Leadership</strong></summary>
+        <p>Materi kepemimpinan akan ditambahkan...</p>
+      </details>
+      <details>
+        <summary><strong>Public Speaking</strong></summary>
+        <p>Materi public speaking akan ditambahkan...</p>
+      </details>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
