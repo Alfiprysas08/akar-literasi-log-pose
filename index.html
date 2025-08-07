@@ -349,36 +349,9 @@
       </details>
     </section>
   </main>
-  <script src="script.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+<script type="module" src="materi.js"></script>
 
-    <!-- Konten halaman kamu di sini -->
-  
-  <!-- Firebase Script Tambahan -->
-  <script type="module">
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCGAfoc8abAW5cf-7qskhXRYb66r-3N4iU",
-      authDomain: "akar-literasi-log-pose.firebaseapp.com",
-      databaseURL: "https://akar-literasi-log-pose-default-rtdb.firebaseio.com",
-      projectId: "akar-literasi-log-pose",
-      storageBucket: "akar-literasi-log-pose.firebasestorage.app",
-      messagingSenderId: "746730519957",
-      appId: "1:746730519957:web:e085cc4d9185c24201ca9c"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    function simpanData() {
-      set(ref(database, 'pengguna/akar-literasi'), {
-        username: "akar",
-        password: "literasi"
-      });
-    }
-
-    window.addEventListener('DOMContentLoaded', simpanData);
-  </script>
 </body>
 </html>
