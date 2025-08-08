@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
-// Ganti dengan konfigurasi milikmu
+// Konfigurasi Firebase (gunakan environment variable di deploy)
 const firebaseConfig = {
   apiKey: "AIzaSyCGAfoc8abAW5cf-7qskhXRYb66r-3N4iU",
   authDomain: "akar-literasi-log-pose.firebaseapp.com",
@@ -14,7 +14,11 @@ const firebaseConfig = {
   measurementId: "G-7HF9FGMMV8"
 };
 
+// Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
+
+// Inisialisasi Realtime Database
 const database = getDatabase(app);
 
-export { database };
+// Ekspor
+export { app, database };

@@ -1,32 +1,30 @@
-// ======================
-// Login dan Logout
-// ======================
-
+// Fungsi login
 function login(event) {
-  event.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  event.preventDefault(); // cegah reload halaman
 
-  if (username === "akar" && password === "literasi") {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("login-error");
+
+  // Username & password default
+  const validUsername = "akar";
+  const validPassword = "literasi";
+
+  if (username === validUsername && password === validPassword) {
     localStorage.setItem("isLoggedIn", "true");
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // pindah ke halaman utama
   } else {
-    const errorMsg = document.getElementById("login-error");
-    if (errorMsg) {
-      errorMsg.textContent = "Username atau password salah!";
-    }
+    errorMsg.textContent = "Username atau password salah!";
   }
 }
 
+// Fungsi logout
 function logout() {
   localStorage.removeItem("isLoggedIn");
   window.location.href = "login.html";
 }
 
-// ======================
-// Navigasi Tab
-// ======================
-
+// Fungsi untuk menampilkan tab
 function showTab(tabId) {
   const tabs = document.querySelectorAll(".tab-content");
   tabs.forEach(tab => tab.classList.remove("active"));
@@ -39,32 +37,11 @@ function showTab(tabId) {
   // Tampilkan kapal hanya di tab home
   const kapal = document.getElementById("kapalLayar");
   if (kapal) {
-    if (tabId === "home") {
-      kapal.classList.remove("hidden");
-    } else {
-      kapal.classList.add("hidden");
-    }
+    kapal.classList.toggle("hidden", tabId !== "home");
   }
 }
 
-// ======================
-// Proteksi Akses (Opsional)
-// ======================
-
-document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.pathname;
-
-  // Cek login saat masuk ke halaman index.html
-  if (currentPage.includes("index.html")) {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (!isLoggedIn) {
-      window.location.href = "login.html";
-    }
-  }
-
-  // Event listener tombol logout
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", logout);
-  }
-});
+// Supaya fungsi bisa dipanggil dari HTML
+window.login = login;
+window.logout = logout;
+window.showTab = showTab;
