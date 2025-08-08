@@ -1,4 +1,4 @@
-import { getDatabase, ref, update, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { getDatabase, ref, push, update, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { database } from './firebase-config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tableBody.innerHTML = "";
     const data = snapshot.val() || {};
 
+    // Render data yang sudah ada
     Object.keys(data).forEach(id => {
       const row = data[id];
       const tr = document.createElement("tr");
@@ -33,6 +34,56 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><input type="url" value="${row.link || ""}" data-id="${id}" class="input-link" placeholder="https://..." /></td>
       `;
       tableBody.appendChild(tr);
+    });
+
+    // Tambahkan baris input untuk data baru
+    const trNew = document.createElement("tr");
+    trNew.innerHTML = `
+      <td><input type="text" id="new-nama" placeholder="Nama Materi" /></td>
+      <td><input type="number" id="new-status" min="0" max="100" value="0" />%</td>
+      <td>
+        <select id="new-pemateri">
+          ${["Mim", "Ibhoy", "Rangga", "Alfi", "Beni", "Fauzi", "Jihan", "Saepul"]
+            .map(p => `<option value="${p}">${p}</option>`)
+            .join("")}
+        </select>
+      </td>
+      <td>
+        <input type="url" id="new-link" placeholder="https://..." />
+        <button id="btn-add">Tambah</button>
+      </td>
+    `;
+    tableBody.appendChild(trNew);
+
+    // Event tombol tambah
+    document.getElementById("btn-add").addEventListener("click", () => {
+      const nama = document.getElementById("new-nama").value.trim();
+      const status = parseInt(document.getElementById("new-status").value) || 0;
+      const pemateri = document.getElementById("new-pemateri").value;
+      const link = document.getElementById("new-link").value.trim();
+
+      if (!nama) {
+        alert("⚠️ Nama materi tidak boleh kosong!");
+        return;
+      }
+
+      push(materiRef, {
+        nama,
+        status,
+        pemateri,
+        link
+      })
+      .then(() => {
+        console.log("✅ Materi baru ditambahkan");
+        // Kosongkan form input
+        document.getElementById("new-nama").value = "";
+        document.getElementById("new-status").value = 0;
+        document.getElementById("new-pemateri").value = "Mim";
+        document.getElementById("new-link").value = "";
+      })
+      .catch(err => {
+        console.error("❌ Gagal menambah materi:", err);
+      });
     });
   });
 
