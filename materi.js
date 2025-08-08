@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </select>
         </td>
         <td><input type="url" value="${row.link || ""}" data-id="${id}" class="input-link" placeholder="https://..." /></td>
+        <td><button class="btn-save" data-id="${id}">Save</button></td>
       `;
       tableBody.appendChild(tr);
     });
@@ -54,9 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
       </td>
     `;
     tableBody.appendChild(trNew);
+  });
 
-    // Event tombol tambah
-    document.getElementById("btn-add").addEventListener("click", () => {
+  // Event tambah data baru
+  tableBody.addEventListener("click", (e) => {
+    if (e.target.id === "btn-add") {
       const nama = document.getElementById("new-nama").value.trim();
       const status = parseInt(document.getElementById("new-status").value) || 0;
       const pemateri = document.getElementById("new-pemateri").value;
@@ -72,42 +75,42 @@ document.addEventListener('DOMContentLoaded', () => {
         status,
         pemateri,
         link
-      })
-      .then(() => {
+      }).then(() => {
         console.log("✅ Materi baru ditambahkan");
-        // Kosongkan form input
         document.getElementById("new-nama").value = "";
         document.getElementById("new-status").value = 0;
         document.getElementById("new-pemateri").value = "Mim";
         document.getElementById("new-link").value = "";
-      })
-      .catch(err => {
-        console.error("❌ Gagal menambah materi:", err);
       });
-    });
+    }
   });
 
-  // Update data saat ada perubahan
-  tableBody.addEventListener("change", (e) => {
-    const id = e.target.getAttribute("data-id");
-    if (!id) return;
+  // Event tombol save
+  tableBody.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-save")) {
+      const id = e.target.getAttribute("data-id");
 
-    const statusValue = parseInt(document.querySelector(`.input-status[data-id="${id}"]`)?.value) || 0;
-    const pemateriValue = document.querySelector(`.select-pemateri[data-id="${id}"]`)?.value || "";
-    const linkValue = document.querySelector(`.input-link[data-id="${id}"]`)?.value || "";
+      const statusValue = parseInt(document.querySelector(`.input-status[data-id="${id}"]`)?.value) || 0;
+      const pemateriValue = document.querySelector(`.select-pemateri[data-id="${id}"]`)?.value || "";
+      const linkValue = document.querySelector(`.input-link[data-id="${id}"]`)?.value || "";
 
-    const statusValid = Math.max(0, Math.min(100, statusValue));
+      const statusValid = Math.max(0, Math.min(100, statusValue));
 
-    update(ref(database, `materi/${id}`), {
-      status: statusValid,
-      pemateri: pemateriValue,
-      link: linkValue
-    })
-    .then(() => {
-      console.log(`✅ Data materi/${id} berhasil diperbarui`);
-    })
-    .catch(err => {
-      console.error(`❌ Gagal update materi/${id}:`, err);
-    });
+      update(ref(database, `materi/${id}`), {
+        status: statusValid,
+        pemateri: pemateriValue,
+        link: linkValue
+      })
+      .then(() => {
+        console.log(`✅ Data materi/${id} berhasil disimpan`);
+        e.target.textContent = "Saved ✅";
+        setTimeout(() => {
+          e.target.textContent = "Save";
+        }, 1500);
+      })
+      .catch(err => {
+        console.error(`❌ Gagal update materi/${id}:`, err);
+      });
+    }
   });
 });
