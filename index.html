@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Akar Literasi Log-pose</title>
+<title>Akar Literasi Log-pose - Login Sederhana</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Special+Elite&display=swap');
-
   body {
     margin: 0;
     font-family: 'Special Elite', monospace;
-    background: #f5f1e9  repeat;
+    background: #f5f1e9 url('https://i.imgur.com/Kp2U4w9.png') repeat;
     color: #2b1b0f;
   }
-
   header {
     background: #c41e3a;
     color: white;
@@ -22,6 +20,7 @@
     font-family: 'Pirata One', cursive;
     text-shadow: 2px 2px 4px #00000099;
     border-bottom: 4px solid #000;
+    position: relative;
   }
   header h1 {
     margin: 0;
@@ -32,7 +31,19 @@
     margin-top: 0.5rem;
     font-style: italic;
   }
-
+  #logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #5e0e14;
+    border: 2px solid #a61c2b;
+    color: #f5f1e9;
+    padding: 0.5rem 1rem;
+    font-family: 'Special Elite', monospace;
+    border-radius: 6px;
+    cursor: pointer;
+    display: none;
+  }
   main {
     padding: 2rem 3rem;
     max-width: 900px;
@@ -41,7 +52,6 @@
     border-radius: 12px;
     box-shadow: 0 0 15px #b35335cc;
   }
-
   h2 {
     font-family: 'Pirata One', cursive;
     color: #a61c2b;
@@ -50,7 +60,6 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
-
   button, .materi-btn {
     background: #a61c2b;
     border: 2px solid #5e0e14;
@@ -66,7 +75,6 @@
     background: #5e0e14;
     border-color: #a61c2b;
   }
-
   table {
     width: 100%;
     border-collapse: collapse;
@@ -74,7 +82,6 @@
     font-family: 'Special Elite', monospace;
     box-shadow: 0 0 8px #5e0e14aa;
   }
-
   th, td {
     border: 1px solid #5e0e14;
     padding: 0.7rem 1rem;
@@ -85,7 +92,6 @@
     color: #f5f1e9;
     text-shadow: 1px 1px 2px #000000aa;
   }
-
   input[type='text'], input[type='number'], select {
     width: 100%;
     padding: 0.4rem;
@@ -100,21 +106,159 @@
     outline: none;
     box-shadow: 0 0 5px #a61c2b88;
   }
-
   tbody tr:hover {
     background-color: #fbe9e9;
     cursor: pointer;
   }
+  #login-section {
+    max-width: 400px;
+    margin: 2rem auto;
+  }
+  #login-section input {
+    margin-bottom: 1rem;
+  }
+  #error-msg {
+    color: red;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+ /* Responsive for iPhone 7 Plus */
+/* Responsive for iPhone 7 Plus */
+@media only screen and (max-width: 414px) {
+  body {
+    padding: 10px;
+    background-size: cover;
+  }
+
+  #login-section {
+    width: 100% !important;
+    padding: 20px 15px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  #login-section h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  #login-section input {
+    padding: 10px 12px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  #login-btn {
+    font-size: 16px;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  body.logged-in main {
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #materi-list ul {
+    padding-left: 15px;
+  }
+
+  #materi-list li {
+    margin-bottom: 8px;
+  }
+
+  .materi-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  table {
+    font-size: 13px;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  thead, tbody, tr, th, td {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #5e0e14;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  tbody td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  tbody td:before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #a61c2b;
+  }
+
+  tbody td:nth-of-type(1):before { content: "Nama Materi"; }
+  tbody td:nth-of-type(2):before { content: "Status (%)"; }
+  tbody td:nth-of-type(3):before { content: "Pemateri"; }
+  tbody td:nth-of-type(4):before { content: "Link"; }
+
+  #materi-table-body input,
+  #materi-table-body select {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #logout-btn {
+    top: 10px;
+    right: 10px;
+    padding: 0.4rem 0.8rem;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+}
+
 </style>
 </head>
 <body>
 <header>
   <h1>Akar Literasi Log-pose 🏴‍☠️</h1>
   <p>Petualangan literasi dimulai dari sini!</p>
+  <button id="logout-btn">Logout</button>
 </header>
-
 <main>
-  <section id="materi-list">
+  <section id="login-section">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button id="login-btn">Login</button>
+    <p id="error-msg"></p>
+  </section>
+
+  <section id="materi-list" style="display:none;">
     <h2>Materi</h2>
     <ul>
       <li><button class="materi-btn" data-target="strategi">Strategi Sukses di Sekolah</button></li>
@@ -144,23 +288,22 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-  // Ganti dengan konfigurasi Firebase kamu
+  // Firebase config dan init
   const firebaseConfig = {
-  apiKey: "AIzaSyCGAfoc8abAW5cf-7qskhXRYb66r-3N4iU",
-  authDomain: "akar-literasi-log-pose.firebaseapp.com",
-  databaseURL: "https://akar-literasi-log-pose-default-rtdb.firebaseio.com",
-  projectId: "akar-literasi-log-pose",
-  storageBucket: "akar-literasi-log-pose.firebasestorage.app",
-  messagingSenderId: "746730519957",
-  appId: "1:746730519957:web:e085cc4d9185c24201ca9c",
-  measurementId: "G-7HF9FGMMV8"
+    apiKey: "AIzaSyCGAfoc8abAW5cf-7qskhXRYb66r-3N4iU",
+    authDomain: "akar-literasi-log-pose.firebaseapp.com",
+    databaseURL: "https://akar-literasi-log-pose-default-rtdb.firebaseio.com",
+    projectId: "akar-literasi-log-pose",
+    storageBucket: "akar-literasi-log-pose.firebasestorage.app",
+    messagingSenderId: "746730519957",
+    appId: "1:746730519957:web:e085cc4d9185c24201ca9c",
+    measurementId: "G-7HF9FGMMV8"
   };
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
   const pemateriList = ['Mim','Ibhoy','Rangga','Alfi','Beni','Fauzi','Jihan','Saepul'];
-
   const defaultMateri = {
     strategi: [
       { namaMateri: 'Memaknai arti kata sukses', status: 0, pemateri: 'Mim', link: '' },
@@ -187,6 +330,50 @@
 
   let currentMateriKey = null;
 
+  // Elemen UI
+  const loginSection = document.getElementById('login-section');
+  const materiListSection = document.getElementById('materi-list');
+  const materiDetailSection = document.getElementById('materi-detail');
+  const logoutBtn = document.getElementById('logout-btn');
+  const errorMsg = document.getElementById('error-msg');
+
+  // Cek status login di sessionStorage
+  function cekLogin() {
+    const loggedIn = sessionStorage.getItem('loggedIn');
+    if (loggedIn === 'true') {
+      loginSection.style.display = 'none';
+      materiListSection.style.display = 'block';
+      logoutBtn.style.display = 'inline-block';
+    } else {
+      loginSection.style.display = 'block';
+      materiListSection.style.display = 'none';
+      materiDetailSection.style.display = 'none';
+      logoutBtn.style.display = 'none';
+    }
+  }
+
+  cekLogin();
+
+  // Login event
+  document.getElementById('login-btn').addEventListener('click', () => {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if (username === 'akar' && password === 'literasi') {
+      sessionStorage.setItem('loggedIn', 'true');
+      errorMsg.textContent = '';
+      cekLogin();
+    } else {
+      errorMsg.textContent = 'Username atau password salah!';
+    }
+  });
+
+  // Logout event
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem('loggedIn');
+    cekLogin();
+  });
+
+  // Fungsi buat baris tabel editable
   function createRow(data = {}) {
     const tr = document.createElement('tr');
 
@@ -229,6 +416,7 @@
     return tr;
   }
 
+  // Render tabel
   function renderTable(materiArray) {
     const tbody = document.getElementById('materi-table-body');
     tbody.innerHTML = '';
@@ -247,20 +435,17 @@
     });
   }
 
+  // Load data dari Firebase
   async function loadData(materiKey) {
     try {
       const snapshot = await db.ref('silabus/' + materiKey).get();
       if (snapshot.exists()) {
         const val = snapshot.val();
-        console.log('loadData Firebase raw data:', val);
         if (!Array.isArray(val)) {
-          const arr = Object.values(val);
-          console.log('loadData converted to array:', arr);
-          return arr;
+          return Object.values(val);
         }
         return val;
       } else {
-        console.log('loadData menggunakan defaultMateri');
         return defaultMateri[materiKey] || [];
       }
     } catch (error) {
@@ -269,6 +454,7 @@
     }
   }
 
+  // Simpan data ke Firebase
   function saveData() {
     if (!currentMateriKey) return alert('Pilih materi dulu!');
     const tbody = document.getElementById('materi-table-body');
@@ -290,33 +476,35 @@
       .catch(err => alert('Gagal simpan data: ' + err));
   }
 
+  // Event klik tombol materi
   async function onMateriClick(e) {
-    try {
-      const key = e.target.getAttribute('data-target');
-      currentMateriKey = key;
-      document.getElementById('materi-detail').style.display = 'block';
-      document.getElementById('materi-title').textContent = e.target.textContent;
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+      alert('Silakan login dulu!');
+      return;
+    }
+    const key = e.target.getAttribute('data-target');
+    currentMateriKey = key;
+    materiDetailSection.style.display = 'block';
+    document.getElementById('materi-title').textContent = e.target.textContent;
 
-      const data = await loadData(key);
-      renderTable(data);
+    const data = await loadData(key);
+    renderTable(data);
 
-      if (!document.getElementById('saveMateriBtn')) {
-        const btn = document.createElement('button');
-        btn.id = 'saveMateriBtn';
-        btn.textContent = 'Simpan';
-        btn.style.marginTop = '10px';
-        btn.addEventListener('click', saveData);
-        document.getElementById('materi-detail').appendChild(btn);
-      }
-    } catch (error) {
-      console.error('Error in onMateriClick:', error);
-      alert('Gagal memuat materi. Cek console untuk detail error.');
+    if (!document.getElementById('saveMateriBtn')) {
+      const btn = document.createElement('button');
+      btn.id = 'saveMateriBtn';
+      btn.textContent = 'Simpan';
+      btn.style.marginTop = '10px';
+      btn.addEventListener('click', saveData);
+      materiDetailSection.appendChild(btn);
     }
   }
 
+  // Pasang event listener tombol materi
   document.querySelectorAll('.materi-btn').forEach(btn => {
     btn.addEventListener('click', onMateriClick);
   });
+
 </script>
 </body>
 </html>
