@@ -193,7 +193,26 @@
     </section>
   </main>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
   <script>
+    // Isi konfigurasi Firebase kamu di sini:
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Inisialisasi Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     const pemateriList = [
       'Mim',
       'Ibhoy',
@@ -231,10 +250,10 @@
 
     let currentMateriKey = null;
 
+    // Buat baris tabel editable
     function createRow(data = {}) {
       const tr = document.createElement('tr');
 
-      // Nama Materi (input teks)
       const namaTd = document.createElement('td');
       const namaInput = document.createElement('input');
       namaInput.type = 'text';
@@ -242,7 +261,6 @@
       namaTd.appendChild(namaInput);
       tr.appendChild(namaTd);
 
-      // Status Pengerjaan (input number 0-100)
       const statusTd = document.createElement('td');
       const statusInput = document.createElement('input');
       statusInput.type = 'number';
@@ -252,7 +270,6 @@
       statusTd.appendChild(statusInput);
       tr.appendChild(statusTd);
 
-      // Pemateri (dropdown)
       const pemateriTd = document.createElement('td');
       const pemateriSelect = document.createElement('select');
       for (const p of pemateriList) {
@@ -265,7 +282,6 @@
       pemateriTd.appendChild(pemateriSelect);
       tr.appendChild(pemateriTd);
 
-      // Link (input teks)
       const linkTd = document.createElement('td');
       const linkInput = document.createElement('input');
       linkInput.type = 'text';
@@ -277,30 +293,43 @@
       return tr;
     }
 
+    // Render tabel ke tbody
     function renderTable(materiArray) {
       const tbody = document.getElementById('materi-table-body');
       tbody.innerHTML = '';
-      materiArray.forEach((item) => {
+      materiArray.forEach(item => {
         tbody.appendChild(createRow(item));
       });
     }
 
-    function loadData(materiKey) {
-      const saved = localStorage.getItem('silabusData-' + materiKey);
-      if (saved) {
-        return JSON.parse(saved);
-      } else {
+    // Load data dari Firebase
+    async function loadData(materiKey) {
+      try {
+        const snapshot = await db.ref('silabus/' + materiKey).get();
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          // Kalau data berupa objek, ubah jadi array
+          if (!Array.isArray(val)) {
+            return Object.values(val);
+          }
+          return val;
+        } else {
+          return defaultMateri[materiKey] || [];
+        }
+      } catch (error) {
+        console.error('Error loading data:', error);
         return defaultMateri[materiKey] || [];
       }
     }
 
+    // Simpan data ke Firebase
     function saveData() {
       if (!currentMateriKey) return alert('Pilih materi dulu!');
       const tbody = document.getElementById('materi-table-body');
       const rows = tbody.querySelectorAll('tr');
       const dataToSave = [];
 
-      rows.forEach((row) => {
+      rows.forEach(row => {
         const inputs = row.querySelectorAll('input, select');
         dataToSave.push({
           namaMateri: inputs[0].value,
@@ -310,30 +339,39 @@
         });
       });
 
-      localStorage.setItem('silabusData-' + currentMateriKey, JSON.stringify(dataToSave));
-      alert('Data berhasil disimpan!');
+      db.ref('silabus/' + currentMateriKey).set(dataToSave)
+        .then(() => alert('Data berhasil disimpan di Firebase!'))
+        .catch(err => alert('Gagal simpan data: ' + err));
     }
 
-    function onMateriClick(e) {
-      const key = e.target.getAttribute('data-target');
-      currentMateriKey = key;
-      document.getElementById('materi-detail').style.display = 'block';
-      document.getElementById('materi-title').textContent = e.target.textContent;
+    // Event klik tombol materi, load data dan render
+    async function onMateriClick(e) {
+      try {
+        const key = e.target.getAttribute('data-target');
+        currentMateriKey = key;
+        document.getElementById('materi-detail').style.display = 'block';
+        document.getElementById('materi-title').textContent = e.target.textContent;
 
-      const data = loadData(key);
-      renderTable(data);
+        const data = await loadData(key);
+        console.log('Data loaded:', data);
+        renderTable(data);
 
-      if (!document.getElementById('saveMateriBtn')) {
-        const btn = document.createElement('button');
-        btn.id = 'saveMateriBtn';
-        btn.textContent = 'Simpan';
-        btn.style.marginTop = '10px';
-        btn.addEventListener('click', saveData);
-        document.getElementById('materi-detail').appendChild(btn);
+        // Tambah tombol Simpan kalau belum ada
+        if (!document.getElementById('saveMateriBtn')) {
+          const btn = document.createElement('button');
+          btn.id = 'saveMateriBtn';
+          btn.textContent = 'Simpan';
+          btn.style.marginTop = '10px';
+          btn.addEventListener('click', saveData);
+          document.getElementById('materi-detail').appendChild(btn);
+        }
+      } catch (error) {
+        console.error('Error in onMateriClick:', error);
+        alert('Gagal memuat materi. Cek console untuk detail error.');
       }
     }
 
-    document.querySelectorAll('.materi-btn').forEach((btn) => {
+    document.querySelectorAll('.materi-btn').forEach(btn => {
       btn.addEventListener('click', onMateriClick);
     });
   </script>
