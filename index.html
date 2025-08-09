@@ -4,361 +4,197 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akar Literasi Log-pose</title>
-  <link rel="stylesheet" href="style.css">
-  <script>
-    // Cek login
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-      window.location.href = "login.html";
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IM Fell English SC', serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f4e7 url('https://i.ibb.co/pRL2Gvw/paper-texture.jpg') repeat;
+      color: #2c1b0f;
     }
-  </script>
+    header {
+      background: linear-gradient(to right, #3e2723, #5d4037);
+      color: #f4e1c1;
+      text-align: center;
+      padding: 20px;
+      font-size: 2.5em;
+      font-family: 'Pirata One', cursive;
+      border-bottom: 5px solid #d4af37;
+      text-shadow: 2px 2px 5px #000;
+    }
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 10px;
+      color: #4e342e;
+    }
+    details summary {
+      font-weight: bold;
+      cursor: pointer;
+      background: #d7ccc8;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #8d6e63;
+      font-size: 1.2em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    th, td {
+      border: 1px solid #6d4c41;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #4e342e;
+      color: #f4e1c1;
+      font-family: 'Pirata One', cursive;
+    }
+    select, input[type="number"] {
+      padding: 5px;
+      border: 1px solid #6d4c41;
+      background: #f9f4e7;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    tr:hover {
+      background: rgba(212, 175, 55, 0.2);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    Akar Literasi Log-pose
-    <button onclick="logout()">Logout</button>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="#" onclick="showTab('home')">HOME</a></li>
-      <li><a href="#" onclick="showTab('materi')">LOG-POSE</a></li>
-    </ul>
-  </nav>
+<header>
+  🏴‍☠️ Akar Literasi Log-pose
+</header>
 
-  <main>
-    <section id="home" class="tab-content active">
-      <h2>Selamat datang di Akar Literasi Log-pose 🏴‍☠️</h2>
-      <p>Petualangan literasi dimulai dari sini!</p>
-    </section>
-   <img src="pirates.png" alt="Kapal Layar" class="kapal-layar hidden" id="kapalLayar" />
+<section>
+  <h2>Selamat datang di Akar Literasi Log-pose 🏴‍☠️</h2>
+  <p>Petualangan literasi dimulai dari sini!</p>
+</section>
 
+<section>
+  <h2>Materi</h2>
 
-    <section id="materi" class="tab-content">
-  <h2>Materi Silabus</h2>
-  <details open>
-    <summary><strong>Strategi Sukses di Sekolah</strong></summary>
-    <table id="materi-table">
+  <details>
+    <summary>Strategi Sukses di Sekolah</summary>
+    <table>
       <thead>
         <tr>
           <th>Nama Materi</th>
-          <th>Status Pengerjaan</th>
+          <th>Status (%)</th>
           <th>Pemateri</th>
-          <th>Link</th>
-          <th>Aksi</th> <!-- Kolom untuk tombol Save -->
         </tr>
       </thead>
-      <tbody>
-        <!-- Data akan diisi otomatis oleh materi.js -->
+      <tbody id="materi-table">
+        <!-- Data dari JS -->
       </tbody>
     </table>
   </details>
 </section>
 
-    <td>Memaknai arti kata sukses</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Keresahan sebagai kekuatan</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Motivasi belajar</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Life is the choice</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Luka pengasuhan</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Leadership mastery</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Sang mentor</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Kecerdasan emosional</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Outdoor learning</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Manajemen waktu</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Manajemen amal</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Manajemen keuangan</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Manajemen konflik</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Personal branding</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Agent of change</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Good followership</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-  <tr>
-    <td>Dunia adalah permainan</td>
-    <td><input type="number" min="0" max="100" value="0" /> %</td>
-    <td>
-      <select>
-        <option>Mim</option>
-        <option>Ibhoy</option>
-        <option>Rangga</option>
-        <option>Alfi</option>
-        <option>Beni</option>
-        <option>Fauzi</option>
-        <option>Jihan</option>
-        <option>Saepul</option>
-      </select>
-    </td>
-    <td><input type="url" placeholder="https://..." /></td>
-  </tr>
-</tbody>
-        </table>
-      </details>
-      <details>
-        <summary><strong>Leadership</strong></summary>
-        <p>Materi kepemimpinan akan ditambahkan...</p>
-      </details>
-      <details>
-        <summary><strong>Public Speaking</strong></summary>
-        <p>Materi public speaking akan ditambahkan...</p>
-      </details>
-    </section>
-  </main>
-  <script type="module" src="main.js"></script>
-  <script type="module" src="firebase-config.js"></script>
-<script type="module" src="materi.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
 
+<script>
+  // Konfigurasi Firebase (isi dengan milikmu)
+  const firebaseConfig = {
+    apiKey: "API_KEY_KAMU",
+    authDomain: "DOMAIN_KAMU",
+    databaseURL: "URL_DATABASE_KAMU",
+    projectId: "PROJECT_ID_KAMU",
+    storageBucket: "STORAGE_BUCKET_KAMU",
+    messagingSenderId: "SENDER_ID_KAMU",
+    appId: "APP_ID_KAMU"
+  };
+
+  // Inisialisasi Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  const materiList = [
+    "Memaknai arti kata sukses",
+    "Keresahan sebagai kekuatan",
+    "Motivasi belajar",
+    "Life is the choice",
+    "Luka pengasuhan",
+    "Leadership mastery",
+    "Sang mentor",
+    "Kecerdasan emosional",
+    "Outdoor learning",
+    "Manajemen waktu",
+    "Manajemen amal",
+    "Manajemen keuangan",
+    "Manajemen konflik",
+    "Personal branding",
+    "Agent of change",
+    "Good followership",
+    "Dunia adalah permainan"
+  ];
+
+  const tableBody = document.getElementById("materi-table");
+
+  materiList.forEach(materi => {
+    const row = document.createElement("tr");
+
+    const namaCell = document.createElement("td");
+    namaCell.textContent = materi;
+
+    const statusCell = document.createElement("td");
+    const statusInput = document.createElement("input");
+    statusInput.type = "number";
+    statusInput.min = 0;
+    statusInput.max = 100;
+    statusInput.value = 0;
+    statusInput.addEventListener("change", () => saveMateri(materi, statusInput.value, pemateriSelect.value));
+    statusCell.appendChild(statusInput);
+
+    const pemateriCell = document.createElement("td");
+    const pemateriSelect = document.createElement("select");
+    ["Mim", "Ibhoy", "Rangga", "Alfi", "Beni", "Fauzi", "Jihan", "Saepul"].forEach(p => {
+      const opt = document.createElement("option");
+      opt.value = p;
+      opt.textContent = p;
+      pemateriSelect.appendChild(opt);
+    });
+    pemateriSelect.addEventListener("change", () => saveMateri(materi, statusInput.value, pemateriSelect.value));
+    pemateriCell.appendChild(pemateriSelect);
+
+    row.appendChild(namaCell);
+    row.appendChild(statusCell);
+    row.appendChild(pemateriCell);
+    tableBody.appendChild(row);
+  });
+
+  function saveMateri(nama, status, pemateri) {
+    firebase.database().ref("strategi_sukses/" + nama).set({
+      status: status,
+      pemateri: pemateri
+    });
+  }
+
+  firebase.database().ref("strategi_sukses").on("value", snapshot => {
+    const data = snapshot.val();
+    if (data) {
+      Array.from(tableBody.rows).forEach(row => {
+        const materiName = row.cells[0].textContent;
+        if (data[materiName]) {
+          row.cells[1].querySelector("input").value = data[materiName].status;
+          row.cells[2].querySelector("select").value = data[materiName].pemateri;
+        }
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
