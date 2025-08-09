@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Akar Literasi Log-pose</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <style>
+    /* Import font pirate */
+    @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Special+Elite&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Special Elite', monospace;
+      background: #f5f1e9 url('https://i.imgur.com/Kp2U4w9.png') repeat;
+      color: #2b1b0f;
+    }
+
+    header {
+      background: #c41e3a;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Pirata One', cursive;
+      text-shadow: 2px 2px 4px #00000099;
+      border-bottom: 4px solid #000;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    main {
+      padding: 2rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 0 15px #b35335cc;
+    }
+
+    h2 {
+      font-family: 'Pirata One', cursive;
+      color: #a61c2b;
+      border-bottom: 2px solid #a61c2b;
+      padding-bottom: 0.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    button,
+    .materi-btn {
+      background: #a61c2b;
+      border: 2px solid #5e0e14;
+      color: #f5f1e9;
+      padding: 0.5rem 1rem;
+      font-family: 'Special Elite', monospace;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      margin: 0.2rem;
+    }
+
+    button:hover,
+    .materi-btn:hover {
+      background: #5e0e14;
+      border-color: #a61c2b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-family: 'Special Elite', monospace;
+      box-shadow: 0 0 8px #5e0e14aa;
+    }
+
+    th,
+    td {
+      border: 1px solid #5e0e14;
+      padding: 0.7rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background: #a61c2b;
+      color: #f5f1e9;
+      text-shadow: 1px 1px 2px #000000aa;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    select {
+      width: 100%;
+      padding: 0.4rem;
+      border: 1.5px solid #5e0e14;
+      border-radius: 4px;
+      font-family: 'Special Elite', monospace;
+      background: #fff7e6;
+      color: #2b1b0f;
+    }
+
+    input[type='text']:focus,
+    input[type='number']:focus,
+    select:focus {
+      border-color: #a61c2b;
+      outline: none;
+      box-shadow: 0 0 5px #a61c2b88;
+    }
+
+    /* Scrollbar gaya kayu */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f5f1e9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #a61c2b;
+      border-radius: 10px;
+      border: 2px solid #f5f1e9;
+    }
+
+    /* Tambahan efek hover baris tabel */
+    tbody tr:hover {
+      background-color: #fbe9e9;
+      cursor: pointer;
+    }
+
+    /* Footer atau tambahan kecil */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 1rem;
+      color: #a61c2b;
+      font-family: 'Pirata One', cursive;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -18,50 +159,183 @@
     <section id="materi-list">
       <h2>Materi</h2>
       <ul>
-        <li><button class="materi-btn" data-target="strategi">Strategi Sukses di Sekolah</button></li>
-        <li><button class="materi-btn" data-target="leadership">Leadership</button></li>
-        <li><button class="materi-btn" data-target="public-speaking">Publik Speaking</button></li>
+        <li>
+          <button class="materi-btn" data-target="strategi">
+            Strategi Sukses di Sekolah
+          </button>
+        </li>
+        <li>
+          <button class="materi-btn" data-target="leadership">Leadership</button>
+        </li>
+        <li>
+          <button class="materi-btn" data-target="public-speaking">
+            Publik Speaking
+          </button>
+        </li>
       </ul>
     </section>
 
     <!-- Tabel Materi -->
-   <section id="materi-detail" style="display: none;">
-  <h2 id="materi-title"></h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nama Materi</th>
-        <th>Status</th>
-        <th>Pemateri</th>
-      </tr>
-    </thead>
-    <tbody id="materi-table-body"></tbody>
-  </table>
-  <!-- Tombol save akan muncul lewat JS -->
-</section>
-
+    <section id="materi-detail" style="display: none;">
+      <h2 id="materi-title"></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Materi</th>
+            <th>Status (%)</th>
+            <th>Pemateri</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="materi-table-body"></tbody>
+      </table>
+      <!-- Tombol save akan muncul lewat JS -->
+    </section>
   </main>
 
-  <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
   <script>
-    // Konfigurasi Firebase (GANTI DENGAN PUNYAMU)
-    const firebaseConfig = {
-      apiKey: "API_KEY",
-      authDomain: "PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://PROJECT_ID-default-rtdb.firebaseio.com",
-      projectId: "PROJECT_ID",
-      storageBucket: "PROJECT_ID.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
+    const pemateriList = [
+      'Mim',
+      'Ibhoy',
+      'Rangga',
+      'Alfi',
+      'Beni',
+      'Fauzi',
+      'Jihan',
+      'Saepul',
+    ];
+
+    const defaultMateri = {
+      strategi: [
+        { namaMateri: 'Memaknai arti kata sukses', status: 0, pemateri: 'Mim', link: '' },
+        { namaMateri: 'Keresahan sebagai kekuatan', status: 0, pemateri: 'Ibhoy', link: '' },
+        { namaMateri: 'Motivasi belajar', status: 0, pemateri: 'Rangga', link: '' },
+        { namaMateri: 'Life is the choice', status: 0, pemateri: 'Alfi', link: '' },
+        { namaMateri: 'Luka pengasuhan', status: 0, pemateri: 'Beni', link: '' },
+        { namaMateri: 'Leadership mastery', status: 0, pemateri: 'Fauzi', link: '' },
+        { namaMateri: 'Sang mentor', status: 0, pemateri: 'Jihan', link: '' },
+        { namaMateri: 'Kecerdasan emosional', status: 0, pemateri: 'Saepul', link: '' },
+        { namaMateri: 'Outdoor learning', status: 0, pemateri: 'Mim', link: '' },
+        { namaMateri: 'Manajemen waktu', status: 0, pemateri: 'Ibhoy', link: '' },
+        { namaMateri: 'Manajemen amal', status: 0, pemateri: 'Rangga', link: '' },
+        { namaMateri: 'Manajemen keuangan', status: 0, pemateri: 'Alfi', link: '' },
+        { namaMateri: 'Manajemen konflik', status: 0, pemateri: 'Beni', link: '' },
+        { namaMateri: 'Personal branding', status: 0, pemateri: 'Fauzi', link: '' },
+        { namaMateri: 'Agent of change', status: 0, pemateri: 'Jihan', link: '' },
+        { namaMateri: 'Good followership', status: 0, pemateri: 'Saepul', link: '' },
+        { namaMateri: 'Dunia adalah permainan', status: 0, pemateri: 'Mim', link: '' },
+      ],
+      leadership: [],
+      'public-speaking': [],
     };
 
-    // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
+    let currentMateriKey = null;
 
-  <script src="materi.js"></script>
+    function createRow(data = {}) {
+      const tr = document.createElement('tr');
+
+      // Nama Materi (input teks)
+      const namaTd = document.createElement('td');
+      const namaInput = document.createElement('input');
+      namaInput.type = 'text';
+      namaInput.value = data.namaMateri || '';
+      namaTd.appendChild(namaInput);
+      tr.appendChild(namaTd);
+
+      // Status Pengerjaan (input number 0-100)
+      const statusTd = document.createElement('td');
+      const statusInput = document.createElement('input');
+      statusInput.type = 'number';
+      statusInput.min = 0;
+      statusInput.max = 100;
+      statusInput.value = data.status || 0;
+      statusTd.appendChild(statusInput);
+      tr.appendChild(statusTd);
+
+      // Pemateri (dropdown)
+      const pemateriTd = document.createElement('td');
+      const pemateriSelect = document.createElement('select');
+      for (const p of pemateriList) {
+        const option = document.createElement('option');
+        option.value = p;
+        option.textContent = p;
+        pemateriSelect.appendChild(option);
+      }
+      pemateriSelect.value = data.pemateri || pemateriList[0];
+      pemateriTd.appendChild(pemateriSelect);
+      tr.appendChild(pemateriTd);
+
+      // Link (input teks)
+      const linkTd = document.createElement('td');
+      const linkInput = document.createElement('input');
+      linkInput.type = 'text';
+      linkInput.value = data.link || '';
+      linkInput.placeholder = 'https://...';
+      linkTd.appendChild(linkInput);
+      tr.appendChild(linkTd);
+
+      return tr;
+    }
+
+    function renderTable(materiArray) {
+      const tbody = document.getElementById('materi-table-body');
+      tbody.innerHTML = '';
+      materiArray.forEach((item) => {
+        tbody.appendChild(createRow(item));
+      });
+    }
+
+    function loadData(materiKey) {
+      const saved = localStorage.getItem('silabusData-' + materiKey);
+      if (saved) {
+        return JSON.parse(saved);
+      } else {
+        return defaultMateri[materiKey] || [];
+      }
+    }
+
+    function saveData() {
+      if (!currentMateriKey) return alert('Pilih materi dulu!');
+      const tbody = document.getElementById('materi-table-body');
+      const rows = tbody.querySelectorAll('tr');
+      const dataToSave = [];
+
+      rows.forEach((row) => {
+        const inputs = row.querySelectorAll('input, select');
+        dataToSave.push({
+          namaMateri: inputs[0].value,
+          status: parseInt(inputs[1].value) || 0,
+          pemateri: inputs[2].value,
+          link: inputs[3].value,
+        });
+      });
+
+      localStorage.setItem('silabusData-' + currentMateriKey, JSON.stringify(dataToSave));
+      alert('Data berhasil disimpan!');
+    }
+
+    function onMateriClick(e) {
+      const key = e.target.getAttribute('data-target');
+      currentMateriKey = key;
+      document.getElementById('materi-detail').style.display = 'block';
+      document.getElementById('materi-title').textContent = e.target.textContent;
+
+      const data = loadData(key);
+      renderTable(data);
+
+      if (!document.getElementById('saveMateriBtn')) {
+        const btn = document.createElement('button');
+        btn.id = 'saveMateriBtn';
+        btn.textContent = 'Simpan';
+        btn.style.marginTop = '10px';
+        btn.addEventListener('click', saveData);
+        document.getElementById('materi-detail').appendChild(btn);
+      }
+    }
+
+    document.querySelectorAll('.materi-btn').forEach((btn) => {
+      btn.addEventListener('click', onMateriClick);
+    });
+  </script>
 </body>
 </html>
